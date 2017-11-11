@@ -1,16 +1,22 @@
 CC = g++
-LIB =
-LIBDIR =
+LIBS =
 CFLAGS = -g -Wall
-TARGETS = fibonacci
-SRCS = fibonacci.cpp
-SRC_DIR = .
-OBJS = $(SRCS:.cpp=.o)
+LDFLAGS =
+TARGETS = ./bin/fibonacci
+SRC_DIR = ./src
+INC_DIR = ./inc
+OBJ_DIR = ./obj
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
+
+$(TARGETS): $(OBJS) $(LIBS)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	-mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<
 
 all: format $(TARGETS) $(OBJS)
-
-$(TARGETS): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(INCDIR) $(LIBDIR) $(LIB)
 
 format:
 	@for src in $(SRCS) ; do \
