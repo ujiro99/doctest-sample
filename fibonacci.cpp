@@ -57,7 +57,7 @@ class DPFibonacci : public Fibonacci {
     }
 };
 
-class TimeFibonatti {
+class Counter {
   public:
     void setFibonacci(Fibonacci *fib) { t_fib = fib; }
 
@@ -73,20 +73,20 @@ class TimeFibonatti {
 };
 
 int main(int argc, char const *argv[]) {
-    Fibonacci *r_fib  = new RecursiveFibonacci();
-    Fibonacci *m_fib  = new MemorizeFibonacci();
-    Fibonacci *dp_fib = new DPFibonacci();
+    Fibonacci *r_fib = new RecursiveFibonacci();
+    Fibonacci *m_fib = new MemorizeFibonacci();
+    Fibonacci *d_fib = new DPFibonacci();
 
-    TimeFibonatti *t_fib = new TimeFibonatti();
+    Counter *counter = new Counter();
 
     vector<Fibonacci *> fib(3);
     fib[0] = r_fib;
     fib[1] = m_fib;
-    fib[2] = dp_fib;
+    fib[2] = d_fib;
 
     for (int i = 0; i < fib.size(); i++) {
-        t_fib->setFibonacci(fib[i]);
-        t_fib->calcTime(30);
+        counter->setFibonacci(fib[i]);
+        counter->calcTime(30);
     }
     return 0;
 }
