@@ -16,14 +16,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	-mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<
 
-all: format $(TARGETS) $(OBJS)
+all: format docs $(TARGETS) $(OBJS)
 
 format:
 	@for src in $(SRCS) ; do \
 		echo "Formatting $$src..." ; \
-		clang-format -i "$(SRC_DIR)/$$src" ; \
+		clang-format -i "$$src" ; \
 	done
 	@echo "Done"
+
+docs:
+	@doxygen
 
 .PHONY: clean
 clean:
