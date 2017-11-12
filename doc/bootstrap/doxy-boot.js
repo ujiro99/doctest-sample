@@ -274,28 +274,6 @@ $( document ).ready(function() {
   /* 文言変更 */
   /* 全体 - ナビゲーションバー */
   $('#main-menu > li:nth-child(1) > a').text("概要")
-  submenu = $('#main-menu > li:nth-child(2)')
-  $(submenu.find('a')[0]).html($(submenu.find('a')[0]).html().replace("データ構造", "詳細"))
-
-  /* submenu - annotated.html */
-  $(submenu.find('ul > li:nth-child(1) > a')[0]).text("クラス一覧")
-  /* submenu - classes.html */
-  $('a[href="classes.html"]').text("クラスインデックス")
-  field = $(submenu.find('ul > li:nth-child(4) > a')[0])
-  /* submenu - functions.html */
-  field.html(field.html().replace("データフィールド", "フィールド"))
-
-  /* annotated.html */
-  if(this.location.href.indexOf("annotated.html") > 0) {
-    $("#content > div > div > div > div:nth-child(4) > div > div").text("クラス一覧")
-    desc = $("#content > div > div > div > div.contents > div.textblock")
-    desc.text(desc.html().replace("データ構造", "クラス"))
-  }
-
-  /* classes.html */
-  if(this.location.href.indexOf("classes.html") > 0) {
-    $("#content > div > div > div > div:nth-child(4) > div > div").text("クラスインデックス")
-  }
 });
 
 
