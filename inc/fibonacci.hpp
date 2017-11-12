@@ -9,14 +9,14 @@ class Fibonacci {
 
     /**
      * 指定した整数値までのフィボナッチ数を計算する.
-     * @param x[in] 指定する値
+     * @param[in] x 指定する値
      * @return フィボナッチ数
      */
     virtual int calc(int x) = 0;
 };
 
 /**
- * 再帰を使って計算する.
+ * 再帰を使って計算するクラス.
  */
 class RecursiveFibonacci : public Fibonacci {
   public:
@@ -27,7 +27,7 @@ class RecursiveFibonacci : public Fibonacci {
 };
 
 /**
- * メモ化を使って計算する.
+ * メモ化を使って計算するクラス.
  */
 class MemorizeFibonacci : public Fibonacci {
   public:
@@ -41,7 +41,7 @@ class MemorizeFibonacci : public Fibonacci {
 };
 
 /**
- * 動的計画法を使って計算する.
+ * 動的計画法を使って計算するクラス.
  */
 class DPFibonacci : public Fibonacci {
   public:

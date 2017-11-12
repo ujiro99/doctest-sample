@@ -8,13 +8,13 @@ class Counter {
   public:
     /**
      * フィボナッチ数を計算するオブジェクトを登録する.
-     * @param fib[in] フィボナッチ数を計算するオブジェクト
+     * @param[in] fib フィボナッチ数を計算するオブジェクト
      */
     void setFibonacci(Fibonacci *fib);
 
     /**
      * 計算時間を測定し、stdoutへ出力する.
-     * @param x[in] 指定する値
+     * @param[in] x 指定する値
      */
     void calcTime(int x);
 

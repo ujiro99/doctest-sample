@@ -1,3 +1,7 @@
+/**
+ * @file counter.cpp
+ * @brief フィボナッチ数の計算時間を記録するクラスの定義を記載する.
+ */
 #include "counter.hpp"
 #include <iostream>
 

@@ -1,3 +1,7 @@
+/**
+ * @file fibonacci.cpp
+ * @brief フィボナッチ数を計算するクラスの定義を記載する.
+ */
 #include "fibonacci.hpp"
 
 RecursiveFibonacci::RecursiveFibonacci() { name = "Recursive"; }

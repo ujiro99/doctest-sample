@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief 一番最初に実行される関数を定義する.
+ */
+
 #include <vector>
 #include "counter.hpp"
 #include "fibonacci.hpp"
@@ -6,6 +11,10 @@ using namespace std;
 
 /**
  * main関数.
+ * @param[in] argc コマンドライン引数の数
+ * @param[in] argv コマンドライン引数文字列配列のポインタ
+ * @retval 正常終了: 0
+ * @retval 異常終了: 1
  */
 int main(int argc, char const *argv[]) {
     Fibonacci *r_fib = new RecursiveFibonacci();
