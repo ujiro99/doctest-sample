@@ -1,102 +1,106 @@
 $( document ).ready(function() {
+  $("div.headertitle").addClass("page-header");
+  $("div.title").addClass("h1");
 
-    $("div.headertitle").addClass("page-header");
-    $("div.title").addClass("h1");
+  $('li > a[href="index.html"] > span').before("<i class='fa fa-cog'></i> ");
+  $('li > a[href="modules.html"] > span').before("<i class='fa fa-square'></i> ");
+  $('li > a[href="namespaces.html"] > span').before("<i class='fa fa-bars'></i> ");
+  $('li > a[href="annotated.html"] > span').before("<i class='fa fa-list-ul'></i> ");
+  $('li > a[href="classes.html"] > span').before("<i class='fa fa-book'></i> ");
+  $('li > a[href="inherits.html"] > span').before("<i class='fa fa-sitemap'></i> ");
+  $('li > a[href="functions.html"] > span').before("<i class='fa fa-list'></i> ");
+  $('li > a[href="functions_func.html"] > span').before("<i class='fa fa-list'></i> ");
+  $('li > a[href="functions_vars.html"] > span').before("<i class='fa fa-list'></i> ");
+  $('li > a[href="functions_enum.html"] > span').before("<i class='fa fa-list'></i> ");
+  $('li > a[href="functions_eval.html"] > span').before("<i class='fa fa-list'></i> ");
+  $('img[src="ftv2ns.png"]').replaceWith('<span class="label label-danger">N</span> ');
+  $('img[src="ftv2cl.png"]').replaceWith('<span class="label label-danger">C</span> ');
 
-    $('li > a[href="index.html"] > span').before("<i class='fa fa-cog'></i> ");
-    $('li > a[href="modules.html"] > span').before("<i class='fa fa-square'></i> ");
-    $('li > a[href="namespaces.html"] > span').before("<i class='fa fa-bars'></i> ");
-    $('li > a[href="annotated.html"] > span').before("<i class='fa fa-list-ul'></i> ");
-    $('li > a[href="classes.html"] > span').before("<i class='fa fa-book'></i> ");
-    $('li > a[href="inherits.html"] > span').before("<i class='fa fa-sitemap'></i> ");
-    $('li > a[href="functions.html"] > span').before("<i class='fa fa-list'></i> ");
-    $('li > a[href="functions_func.html"] > span').before("<i class='fa fa-list'></i> ");
-    $('li > a[href="functions_vars.html"] > span').before("<i class='fa fa-list'></i> ");
-    $('li > a[href="functions_enum.html"] > span').before("<i class='fa fa-list'></i> ");
-    $('li > a[href="functions_eval.html"] > span').before("<i class='fa fa-list'></i> ");
-    $('img[src="ftv2ns.png"]').replaceWith('<span class="label label-danger">N</span> ');
-    $('img[src="ftv2cl.png"]').replaceWith('<span class="label label-danger">C</span> ');
+  $("ul.tablist").addClass("nav nav-pills nav-justified");
+  $("ul.tablist").css("margin-top", "0.5em");
+  $("ul.tablist").css("margin-bottom", "0.5em");
+  $("li.current").addClass("active");
+  $("iframe").attr("scrolling", "yes");
 
-    $("ul.tablist").addClass("nav nav-pills nav-justified");
-    $("ul.tablist").css("margin-top", "0.5em");
-    $("ul.tablist").css("margin-bottom", "0.5em");
-    $("li.current").addClass("active");
-    $("iframe").attr("scrolling", "yes");
+  $("#nav-path > ul").addClass("breadcrumb");
 
-    $("#nav-path > ul").addClass("breadcrumb");
+  $("table.params").addClass("table");
+  $("div.ingroups").wrapInner("<span class='text-nowrap'></span>");
+  $("div.levels").css("margin", "0.5em");
+  $("div.levels > span").addClass("btn btn-default btn-xs");
+  $("div.levels > span").css("margin-right", "0.25em");
 
-    $("table.params").addClass("table");
-    $("div.ingroups").wrapInner("<span class='text-nowrap'></span>");
-    $("div.levels").css("margin", "0.5em");
-    $("div.levels > span").addClass("btn btn-default btn-xs");
-    $("div.levels > span").css("margin-right", "0.25em");
+  $("table.directory").addClass("table table-striped");
+  $("div.summary > a").addClass("btn btn-default btn-xs");
+  $("table.fieldtable").addClass("table");
+  $(".fragment").addClass("well");
+  $(".memitem").addClass("panel panel-default");
+  $(".memproto").addClass("panel-heading");
+  $(".memdoc").addClass("panel-body");
+  $("span.mlabel").addClass("label label-info");
 
-    $("table.directory").addClass("table table-striped");
-    $("div.summary > a").addClass("btn btn-default btn-xs");
-    $("table.fieldtable").addClass("table");
-    $(".fragment").addClass("well");
-    $(".memitem").addClass("panel panel-default");
-    $(".memproto").addClass("panel-heading");
-    $(".memdoc").addClass("panel-body");
-    $("span.mlabel").addClass("label label-info");
+  $("table.memberdecls").addClass("table");
+  $("[class^=memitem]").addClass("active");
 
-    $("table.memberdecls").addClass("table");
-    $("[class^=memitem]").addClass("active");
+  $("div.ah").addClass("btn btn-default");
+  $("span.mlabels").addClass("pull-right");
+  $("table.mlabels").css("width", "100%")
+  $("td.mlabels-right").addClass("pull-right");
 
-    $("div.ah").addClass("btn btn-default");
-    $("span.mlabels").addClass("pull-right");
-    $("table.mlabels").css("width", "100%")
-    $("td.mlabels-right").addClass("pull-right");
+  $("div.ttc").addClass("panel panel-primary");
+  $("div.ttname").addClass("panel-heading");
+  $("div.ttname a").css("color", 'white');
+  $("div.ttdef,div.ttdoc,div.ttdeci").addClass("panel-body");
 
-    $("div.ttc").addClass("panel panel-primary");
-    $("div.ttname").addClass("panel-heading");
-    $("div.ttname a").css("color", 'white');
-    $("div.ttdef,div.ttdoc,div.ttdeci").addClass("panel-body");
+  $('div.fragment.well div.line:first').css('margin-top', '2px');
+  $('div.fragment.well div.line:last').css('margin-bottom', '2px');
 
-    $('div.fragment.well div.line:first').css('margin-top', '2px');
-    $('div.fragment.well div.line:last').css('margin-bottom', '2px');
+  $('table.doxtable').removeClass('doxtable').addClass('table table-striped table-bordered').each(function(){
+    $(this).prepend('<thead></thead>');
+    $(this).find('tbody > tr:first').prependTo($(this).find('thead'));
 
-	$('table.doxtable').removeClass('doxtable').addClass('table table-striped table-bordered').each(function(){
-		$(this).prepend('<thead></thead>');
-		$(this).find('tbody > tr:first').prependTo($(this).find('thead'));
+    $(this).find('td > span.success').parent().addClass('success');
+    $(this).find('td > span.warning').parent().addClass('warning');
+    $(this).find('td > span.danger').parent().addClass('danger');
+  });
 
-		$(this).find('td > span.success').parent().addClass('success');
-		$(this).find('td > span.warning').parent().addClass('warning');
-		$(this).find('td > span.danger').parent().addClass('danger');
-	});
+  if($('div.fragment.well div.ttc').length > 0)
+  {
+    $('div.fragment.well div.line:first').parent().removeClass('fragment well');
+  }
 
+  $('table.memberdecls').find('.memItemRight').each(function(){
+    $(this).contents().appendTo($(this).siblings('.memItemLeft'));
+    $(this).siblings('.memItemLeft').attr('align', 'left');
+  });
 
+  $('table.memberdecls').find('.memTemplItemRight').each(function(){
+    $(this).contents().appendTo($(this).siblings('.memTemplItemLeft'));
+    $(this).siblings('.memTemplItemLeft').attr('align', 'left');
+  });
 
-    if($('div.fragment.well div.ttc').length > 0)
-    {
-        $('div.fragment.well div.line:first').parent().removeClass('fragment well');
-    }
+  function getOriginalWidthOfImg(img_element) {
+    var t = new Image();
+    t.src = (img_element.getAttribute ? img_element.getAttribute("src") : false) || img_element.src;
+    return t.width;
+  }
 
-    $('table.memberdecls').find('.memItemRight').each(function(){
-        $(this).contents().appendTo($(this).siblings('.memItemLeft'));
-        $(this).siblings('.memItemLeft').attr('align', 'left');
-    });
+  $('div.dyncontent').find('img').each(function(){
+    if(getOriginalWidthOfImg($(this)[0]) > $('#content>div.container').width())
+      $(this).css('width', '100%');
+  });
 
-    $('table.memberdecls').find('.memTemplItemRight').each(function(){
-        $(this).contents().appendTo($(this).siblings('.memTemplItemLeft'));
-        $(this).siblings('.memTemplItemLeft').attr('align', 'left');
-    });
-
-	function getOriginalWidthOfImg(img_element) {
-		var t = new Image();
-		t.src = (img_element.getAttribute ? img_element.getAttribute("src") : false) || img_element.src;
-		return t.width;
-	}
-
-	$('div.dyncontent').find('img').each(function(){
-		if(getOriginalWidthOfImg($(this)[0]) > $('#content>div.container').width())
-			$(this).css('width', '100%');
-	});
+  var nav_container = $('#main-nav').detach();
+  nav_container.addClass('nav navbar-nav navbar-right');
+  $('nav > .container').append(nav_container);
+  $('#main-nav > ul').addClass('nav navbar-nav navbar-right');
+  $('#main-nav * li > ul').addClass('dropdown-menu');
 
 
   /* responsive search box */
-  $('#MSearchBox').parent().remove();
+  //$('#MSearchBox').parent().remove();
 
+  /*
   var nav_container = $('<div class="row"></div>');
   $('#navrow1').parent().prepend(nav_container);
 
@@ -154,16 +158,16 @@ $( document ).ready(function() {
   searchBox.DOMSearchClose = function(){
     return document.getElementById("search-close");
   }
-
-
+  */
   /* search results */
+
   var results_iframe = $('#MSearchResults').detach();
   $('#MSearchResultsWindow')
     .attr('id', 'search-results-window')
     .addClass('panel panel-default')
     .append(
       '<div class="panel-heading">\
-        <h3 class="panel-title">Search Results</h3>\
+      <h3 class="panel-title">Search Results</h3>\
       </div>\
       <div class="panel-body"></div>'
     );
@@ -211,7 +215,6 @@ $( document ).ready(function() {
     }
   });
 
-
   /* enumerations */
   $('table.fieldtable').removeClass('fieldtable').addClass('table table-striped table-bordered').each(function(){
     $(this).prepend('<thead></thead>');
@@ -227,45 +230,72 @@ $( document ).ready(function() {
   for (var i = 0; i < todoelements.length; i += 2) {
     $('.contents > .textblock').append(
       '<div class="panel panel-default active">'
-        + "<div class=\"panel-heading todoname\">" + $(todoelements[i]).html() + "</div>"
-        + "<div class=\"panel-body\">" + $(todoelements[i+1]).html() + "</div>"
+      + "<div class=\"panel-heading todoname\">" + $(todoelements[i]).html() + "</div>"
+      + "<div class=\"panel-body\">" + $(todoelements[i+1]).html() + "</div>"
       + '</div>');
   }
   $('.contents > .textblock > dl').remove();
 
+  $(".memitem").removeClass('memitem');
+  $(".memproto").removeClass('memproto');
+  $(".memdoc").removeClass('memdoc');
+  $("span.mlabel").removeClass('mlabel');
+  $("table.memberdecls").removeClass('memberdecls');
+  $("[class^=memitem]").removeClass('memitem');
+  $("span.mlabels").removeClass('mlabels');
+  $("table.mlabels").removeClass('mlabels');
+  $("td.mlabels-right").removeClass('mlabels-right');
+  $(".navpath").removeClass('navpath');
+  $("li.navelem").removeClass('navelem');
+  $("a.el").removeClass('el');
+  $("div.ah").removeClass('ah');
+  $("div.header").removeClass("header");
 
-	$(".memitem").removeClass('memitem');
-    $(".memproto").removeClass('memproto');
-    $(".memdoc").removeClass('memdoc');
-	$("span.mlabel").removeClass('mlabel');
-	$("table.memberdecls").removeClass('memberdecls');
-    $("[class^=memitem]").removeClass('memitem');
-    $("span.mlabels").removeClass('mlabels');
-    $("table.mlabels").removeClass('mlabels');
-    $("td.mlabels-right").removeClass('mlabels-right');
-	$(".navpath").removeClass('navpath');
-	$("li.navelem").removeClass('navelem');
-	$("a.el").removeClass('el');
-	$("div.ah").removeClass('ah');
-	$("div.header").removeClass("header");
-
-	$('.mdescLeft').each(function(){
-		if($(this).html()=="&nbsp;") {
-			$(this).siblings('.mdescRight').attr('colspan', 2);
-			$(this).remove();
-		}
-	});
+  $('.mdescLeft').each(function(){
+    if($(this).html()=="&nbsp;") {
+      $(this).siblings('.mdescRight').attr('colspan', 2);
+      $(this).remove();
+    }
+  });
   $('td.memItemLeft').each(function(){
     if($(this).siblings('.memItemRight').html()=="") {
       $(this).attr('colspan', 2);
       $(this).siblings('.memItemRight').remove();
     }
   });
-	$('td.memTemplItemLeft').each(function(){
-		if($(this).siblings('.memTemplItemRight').html()=="") {
-			$(this).attr('colspan', 2);
-			$(this).siblings('.memTemplItemRight').remove();
-		}
-	});
-  searchBox.CloseResultsWindow();
+  $('td.memTemplItemLeft').each(function(){
+    if($(this).siblings('.memTemplItemRight').html()=="") {
+      $(this).attr('colspan', 2);
+      $(this).siblings('.memTemplItemRight').remove();
+    }
+  });
+  //searchBox.CloseResultsWindow();
+
+  /* 文言変更 */
+  /* 全体 - ナビゲーションバー */
+  $('#main-menu > li:nth-child(1) > a').text("概要")
+  submenu = $('#main-menu > li:nth-child(2)')
+  $(submenu.find('a')[0]).html($(submenu.find('a')[0]).html().replace("データ構造", "詳細"))
+
+  /* submenu - annotated.html */
+  $(submenu.find('ul > li:nth-child(1) > a')[0]).text("クラス一覧")
+  /* submenu - classes.html */
+  $('a[href="classes.html"]').text("クラスインデックス")
+  field = $(submenu.find('ul > li:nth-child(4) > a')[0])
+  /* submenu - functions.html */
+  field.html(field.html().replace("データフィールド", "フィールド"))
+
+  /* annotated.html */
+  if(this.location.href.indexOf("annotated.html") > 0) {
+    $("#content > div > div > div > div:nth-child(4) > div > div").text("クラス一覧")
+    desc = $("#content > div > div > div > div.contents > div.textblock")
+    desc.text(desc.html().replace("データ構造", "クラス"))
+  }
+
+  /* classes.html */
+  if(this.location.href.indexOf("classes.html") > 0) {
+    $("#content > div > div > div > div:nth-child(4) > div > div").text("クラスインデックス")
+  }
 });
+
+
