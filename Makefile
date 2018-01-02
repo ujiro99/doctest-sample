@@ -2,22 +2,34 @@ CC = g++
 LIBS =
 CFLAGS = -g -Wall
 LDFLAGS =
-TARGETS = ./bin/fibonacci
+
+TARGETS = fibonacci
+TEST_TARGETS = test_fibonacci
+
 SRC_DIR = ./src
 INC_DIR = ./inc
 OBJ_DIR = ./obj
+TEST_DIR = ./test
+
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 INCS = $(wildcard $(INC_DIR)/*.hpp)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
+DEPENDS = $(OBJS:.o=.d)
+
+all: format $(TARGETS) $(TEST_TARGETS) report
 
 $(TARGETS): $(OBJS) $(LIBS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	-mkdir -p $(OBJ_DIR)
+	@if [ ! -d $(OBJ_DIR) ]; \
+		then echo "mkdir -p $(OBJ_DIR)"; mkdir -p $(OBJ_DIR); \
+		fi
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
-all: format docs $(TARGETS) $(OBJS) report
+$(TEST_TARGETS): $(TEST_DIR)/%.cpp
+	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
+	$(CC) -o $@ $($(TEST_DIR)/%.cpp:.cpp=.o) $(LDFLAGS)
 
 format:
 	@for src in $(INCS) ; do \
@@ -33,10 +45,13 @@ format:
 docs:
 	@doxygen
 
-.PHONY: clean
 clean:
-	$(RM) *~ $(TARGETS) $(OBJS)
+	$(RM) $(TARGETS) $(TEST_TARGETS) $(OBJS) $(DEPENDS)
 
 report:
 	gcovr --xml --output=gcover_result.xml $(SRC_DIR)
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> cppcheck_result.xml
+
+-include $(DEPENDS)
+
+.PHONY: all test clean docs report
