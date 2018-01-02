@@ -17,7 +17,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	-mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
-all: format docs $(TARGETS) $(OBJS)
+all: format docs $(TARGETS) $(OBJS) report
 
 format:
 	@for src in $(INCS) ; do \
@@ -36,3 +36,7 @@ docs:
 .PHONY: clean
 clean:
 	$(RM) *~ $(TARGETS) $(OBJS)
+
+report:
+	gcovr --xml --output=gcover_result.xml $(SRC_DIR)
+	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> cppcheck_result.xml
