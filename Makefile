@@ -33,7 +33,7 @@ $(TEST_TARGETS): $(TEST_OBJ) $(LIBS)
 	$(CC) -o $@ $(TEST_OBJ) $(LDFLAGS)
 
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -coverage -I$(INC_DIR) -o $@ -c $<
 
 format:
 	@for src in $(INCS) ; do \
@@ -53,6 +53,7 @@ clean:
 	$(RM) $(TARGETS) $(TEST_TARGETS) $(OBJS) $(DEPENDS)
 
 report:
+	./$(TEST_TARGETS) 2>&1 > test_result.txt
 	gcovr --xml --output=gcover_result.xml $(SRC_DIR)
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> cppcheck_result.xml
 
