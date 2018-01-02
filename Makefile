@@ -12,8 +12,10 @@ OBJ_DIR = ./obj
 TEST_DIR = ./test
 
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 INCS = $(wildcard $(INC_DIR)/*.hpp)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
+TEST_OBJ = $(addprefix $(TEST_DIR)/, $(notdir $(TESTS:.cpp=.o)))
 DEPENDS = $(OBJS:.o=.d)
 
 all: format $(TARGETS) $(TEST_TARGETS) report
@@ -27,9 +29,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 		fi
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
-$(TEST_TARGETS): $(TEST_DIR)/%.cpp
+$(TEST_TARGETS): $(TEST_OBJ) $(LIBS)
+	$(CC) -o $@ $(TEST_OBJ) $(LDFLAGS)
+
+$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
-	$(CC) -o $@ $($(TEST_DIR)/%.cpp:.cpp=.o) $(LDFLAGS)
 
 format:
 	@for src in $(INCS) ; do \
