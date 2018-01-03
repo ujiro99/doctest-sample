@@ -54,7 +54,7 @@ clean:
 
 report:
 	./$(TEST_TARGETS) 2>&1 > test_result.txt
-	gcovr --xml --output=gcover_result.xml -r .
+	gcovr --xml --output=gcover_result.xml -e test/doctest.h -e test/test_*.cpp -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> cppcheck_result.xml
 
 -include $(DEPENDS)
