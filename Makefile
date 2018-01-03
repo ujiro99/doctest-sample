@@ -3,22 +3,22 @@ LIBS =
 CFLAGS = -g -Wall
 LDFLAGS =
 
+# output files
 TARGETS = fibonacci
-TEST_TARGETS = test_fibonacci
 
+# directories
 SRC_DIR = ./src
 INC_DIR = ./inc
 OBJ_DIR = ./obj
-TEST_DIR = ./test
 
+# files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 INCS = $(wildcard $(INC_DIR)/*.hpp)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
-TEST_OBJ = $(addprefix $(TEST_DIR)/, $(notdir $(TESTS:.cpp=.o)))
 DEPENDS = $(OBJS:.o=.d)
 
-all: format $(TARGETS) $(TEST_TARGETS) report
+# tasks
+all: format $(TARGETS) test
 
 $(TARGETS): $(OBJS) $(LIBS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
@@ -28,12 +28,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 		then echo "mkdir -p $(OBJ_DIR)"; mkdir -p $(OBJ_DIR); \
 		fi
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
-
-$(TEST_TARGETS): $(TEST_OBJ) $(LIBS)
-	$(CC) -o $@ $(TEST_OBJ) $(LDFLAGS) -lgcov -coverage
-
-$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
-	$(CC) $(CFLAGS) -coverage -fprofile-arcs -ftest-coverage -I$(INC_DIR) -I$(SRC_DIR) -o $@ -c $<
 
 format:
 	@for src in $(INCS) ; do \
@@ -50,13 +44,8 @@ docs:
 	@doxygen
 
 clean:
-	$(RM) $(TARGETS) $(TEST_TARGETS) $(OBJS) $(DEPENDS)
-
-report:
-	./$(TEST_TARGETS) 2>&1 > test_result.txt
-	gcovr --xml --output=gcover_result.xml -e test/doctest.h -e test/test_*.cpp -r .
-	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> cppcheck_result.xml
+	$(RM) $(TARGETS) $(OBJS) $(DEPENDS)
 
 -include $(DEPENDS)
 
-.PHONY: all test clean docs report
+.PHONY: all clean docs
