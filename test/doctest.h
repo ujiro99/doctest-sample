@@ -5690,7 +5690,7 @@ int Context::run() {
 #endif // DOCTEST_CONFIG_DISABLE
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-int main(int argc, char** argv) { return doctest::Context(argc, argv).run(); }
+int test_main(int argc, char** argv) { return doctest::Context(argc, argv).run(); }
 #endif // DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 DOCTEST_CLANG_SUPPRESS_WARNING_POP
