@@ -30,7 +30,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
 $(TEST_TARGETS): $(TEST_OBJ) $(LIBS)
-	$(CC) -o $@ $(TEST_OBJ) $(OBJS) $(LDFLAGS) -lgcov --coverage
+	$(CC) -o $@ $(TEST_OBJ) $(OBJS) $(LDFLAGS) -lgcov -coverage
 
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CC) $(CFLAGS) -coverage -fprofile-arcs -ftest-coverage -I$(INC_DIR) -o $@ -c $<
