@@ -19,6 +19,7 @@ h1.groupheader {
 	font-size: 150%;
 	font-weight: bold;
 	margin: 10px 2px;
+	color: #444
 }
 
 h2.groupheader {
@@ -446,6 +447,7 @@ hr {
 
 hr.footer {
 	height: 1px;
+	margin: 0;
 }
 
 /* @group Member Descriptions */
@@ -1165,10 +1167,35 @@ dl.section dd {
 { 
 	border: 0px none;
 }
- 
+
 #projectalign
 {
-        vertical-align: middle;
+  vertical-align: middle;
+  padding: .2em 0 .5em 1em;
+}
+
+#projectalign a {
+  color: #3D578C;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+#projectalign a::after {
+  position: absolute;
+  bottom: 2px;
+  left: -5;
+  content: '';
+  width: 104%;
+  height: 1.5px;
+  background: #3D578C;
+  transform: scale(0, 1);
+  transform-origin: center top;
+  transition: transform .3s;
+}
+
+#projectalign a:hover::after {
+  transform: scale(1, 1);
 }
 
 #projectname
@@ -1180,9 +1207,10 @@ dl.section dd {
     
 #projectbrief
 {
-	font: 120% Tahoma, Arial,sans-serif;
+	font: 110% Tahoma, Arial,sans-serif;
 	margin: 0px;
-	padding: 0px;
+	padding: 4px 0 0 0;
+	color: #444
 }
 
 #projectnumber
@@ -1592,5 +1620,16 @@ th.markdownTableHeadCenter, td.markdownTableBodyCenter {
 	text-align: center
 }
 
+p.github {
+  margin: 0.4em 0 0 0
+}
 
+.github span {
+  vertical-align: top;
+  line-height: 24px;
+}
+
+.octicon {
+  fill: currentColor;
+}
 /* @end */
