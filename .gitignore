@@ -1,6 +1,7 @@
 doc
 *.hpp-*
 *.xml
+*.gcno
 
 # Prerequisites
 *.d
