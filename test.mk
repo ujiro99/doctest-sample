@@ -37,7 +37,7 @@ format:
 
 report:
 	./$(TEST_TARGETS) 2>&1 | tee $(TEST_RESULT)
-	gcovr --xml --output=$(COV_RESULT) -e test/doctest.h -e test/test_*.cpp -r .
+	gcovr --xml --output=$(COV_RESULT) -e 'test/doctest.h' -e 'test/test_.*.cpp' -v -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CEHCK_RESULT)
 
 clean:
