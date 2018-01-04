@@ -18,7 +18,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 DEPS = $(OBJS:.o=.d)
 
 # tasks
-all: format $(TARGETS) test
+all: format $(TARGETS)
 
 $(TARGETS): $(OBJS) $(LIBS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
