@@ -5,9 +5,9 @@ AlignEscapedNewlinesLeft: true
 AlignConsecutiveAssignments: true
 # AlignEscapedNewlinesLeft: true
 # AlignTrailingComments: true,
-# AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: false
 # AllowShortCaseLabelsOnASingleLine: false
-# AllowShortFunctionsOnASingleLine: 'Inline'
+AllowShortFunctionsOnASingleLine: 'Empty'
 # AllowShortIfStatementsOnASingleLine: false
 # AllowShortLoopsOnASingleLine: false
 # AlwaysBreakAfterDefinitionReturnType: false
@@ -18,7 +18,7 @@ AlwaysBreakBeforeMultilineStrings: false
 BreakBeforeBinaryOperators: 'NonAssignment'
 # BreakBeforeBraces: 'Allman'
 # BreakConstructorInitializersBeforeComma: true
-ColumnLimit: 120
+ColumnLimit: 100
 # ConstructorInitializerAllOnOneLineOrOnePerLine: true
 # ConstructorInitializerIndentWidth: 2
 # ContinuationIndentWidth: 2
