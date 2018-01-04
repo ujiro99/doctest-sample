@@ -1,6 +1,6 @@
 CC = g++
 LIBS =
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -MMD -MP
 LDFLAGS =
 
 # output files
@@ -15,7 +15,7 @@ OBJ_DIR = ./obj
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 INCS = $(wildcard $(INC_DIR)/*.hpp)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
-DEPENDS = $(OBJS:.o=.d)
+DEPS = $(OBJS:.o=.d)
 
 # tasks
 all: format $(TARGETS) test
@@ -44,8 +44,8 @@ docs:
 	@doxygen
 
 clean:
-	$(RM) $(TARGETS) $(OBJS) $(DEPENDS)
+	$(RM) $(TARGETS) $(OBJS) $(DEPS)
 
--include $(DEPENDS)
+-include $(DEPS)
 
 .PHONY: all clean docs
