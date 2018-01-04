@@ -32,5 +32,11 @@ int main(int argc, char const *argv[]) {
         counter->setFibonacci(fib[i]);
         counter->calcTime(30);
     }
+
+    delete r_fib;
+    delete m_fib;
+    delete d_fib;
+    delete counter;
+
     return 0;
 }

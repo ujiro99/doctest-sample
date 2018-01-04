@@ -5,6 +5,9 @@
  */
 class Fibonacci {
   public:
+    /** デストラクタ. */
+    virtual ~Fibonacci(){};
+
     const char *name = ""; /**< 計算方法の名称  */
 
     /**
@@ -22,6 +25,8 @@ class RecursiveFibonacci : public Fibonacci {
   public:
     /** コンストラクタ. */
     RecursiveFibonacci();
+    /** デストラクタ. */
+    ~RecursiveFibonacci();
 
     int calc(int x);
 };
@@ -33,6 +38,8 @@ class MemorizeFibonacci : public Fibonacci {
   public:
     /** コンストラクタ. */
     MemorizeFibonacci();
+    /** デストラクタ. */
+    ~MemorizeFibonacci();
 
     int calc(int x);
 
@@ -47,6 +54,8 @@ class DPFibonacci : public Fibonacci {
   public:
     /** コンストラクタ. */
     DPFibonacci();
+    /** デストラクタ. */
+    ~DPFibonacci();
 
     int calc(int x);
 };

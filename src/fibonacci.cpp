@@ -6,6 +6,8 @@
 
 RecursiveFibonacci::RecursiveFibonacci() { name = "Recursive"; }
 
+RecursiveFibonacci::~RecursiveFibonacci() {}
+
 int RecursiveFibonacci::calc(int x) {
     if (x == 0) {
         return 0;
@@ -17,6 +19,8 @@ int RecursiveFibonacci::calc(int x) {
 }
 
 MemorizeFibonacci::MemorizeFibonacci() { name = "Memorize"; }
+
+MemorizeFibonacci::~MemorizeFibonacci() {}
 
 int MemorizeFibonacci::calc(int x) {
     if (x == 0) {
@@ -31,6 +35,8 @@ int MemorizeFibonacci::calc(int x) {
 }
 
 DPFibonacci::DPFibonacci() { name = "Dynamic "; }
+
+DPFibonacci::~DPFibonacci() {}
 
 int DPFibonacci::calc(int x) {
     int dp[1000] = {0, 1};

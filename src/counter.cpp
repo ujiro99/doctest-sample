@@ -7,9 +7,16 @@
 
 using namespace std;
 
+Counter::Counter() { t_fib = NULL; }
+
 void Counter::setFibonacci(Fibonacci *fib) { t_fib = fib; }
 
 void Counter::calcTime(int x) {
+    if (t_fib == NULL) {
+        cout << "[error] Fibonacci is not initialized." << endl;
+        return;
+    }
+
     clock_t start = clock();
     t_fib->calc(x);
     cout << t_fib->name << "\t";
