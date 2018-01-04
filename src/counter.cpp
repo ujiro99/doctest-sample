@@ -7,9 +7,13 @@
 
 using namespace std;
 
-Counter::Counter() { t_fib = NULL; }
+Counter::Counter() {
+    t_fib = NULL;
+}
 
-void Counter::setFibonacci(Fibonacci *fib) { t_fib = fib; }
+void Counter::setFibonacci(Fibonacci *fib) {
+    t_fib = fib;
+}
 
 void Counter::calcTime(int x) {
     if (t_fib == NULL) {

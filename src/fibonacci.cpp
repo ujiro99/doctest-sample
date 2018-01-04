@@ -4,7 +4,9 @@
  */
 #include "fibonacci.hpp"
 
-RecursiveFibonacci::RecursiveFibonacci() { name = "Recursive"; }
+RecursiveFibonacci::RecursiveFibonacci() {
+    name = "Recursive";
+}
 
 RecursiveFibonacci::~RecursiveFibonacci() {}
 
@@ -18,7 +20,9 @@ int RecursiveFibonacci::calc(int x) {
     }
 }
 
-MemorizeFibonacci::MemorizeFibonacci() { name = "Memorize"; }
+MemorizeFibonacci::MemorizeFibonacci() {
+    name = "Memorize";
+}
 
 MemorizeFibonacci::~MemorizeFibonacci() {}
 
@@ -34,7 +38,9 @@ int MemorizeFibonacci::calc(int x) {
     return memo[x];
 }
 
-DPFibonacci::DPFibonacci() { name = "Dynamic "; }
+DPFibonacci::DPFibonacci() {
+    name = "Dynamic ";
+}
 
 DPFibonacci::~DPFibonacci() {}
 
