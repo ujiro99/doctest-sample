@@ -1,5 +1,6 @@
 doc
 *.hpp-*
+*.cpp-*
 *.xml
 *.gcno
 *.gcda
