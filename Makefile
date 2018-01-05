@@ -29,12 +29,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 		fi
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
+FORMAT_TARGETS = $(INCS) $(SRCS)
 format:
-	@for src in $(INCS) ; do \
-		echo "Formatting $$src..." ; \
-		clang-format -i "$$src" ; \
-	done
-	@for src in $(SRCS) ; do \
+	@for src in $(FORMAT_TARGETS) ; do \
 		echo "Formatting $$src..." ; \
 		clang-format -i "$$src" ; \
 	done
@@ -43,9 +40,11 @@ format:
 docs:
 	@doxygen
 
+CLEAN_TARGETS = $(TARGETS) **/*.o **/*.d **/*.cpp-* **/*.hpp-* **/*.gcno **/*.gcda
 clean:
-	$(RM) $(TARGETS) $(OBJS) $(DEPS)
-
--include $(DEPS)
+	$(RM) $(CLEAN_TARGETS)
 
 .PHONY: all clean docs
+
+-include $(DEPS)
+include test.mk

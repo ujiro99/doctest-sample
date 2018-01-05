@@ -1,7 +1,5 @@
-CC = g++
-LIBS =
-CFLAGS = -g -Wall -MMD -MP -coverage -fprofile-arcs -ftest-coverage
-LDFLAGS = -lgcov -coverage
+TEST_CFLAGS = -g -Wall -MMD -MP -coverage -fprofile-arcs -ftest-coverage
+TEST_LDFLAGS = -lgcov -coverage
 
 # output files
 TEST_TARGETS = test_fibonacci
@@ -10,43 +8,31 @@ COV_RESULT   = gcover_result.xml
 CEHCK_RESULT = cppcheck_result.xml
 
 # directories
-SRC_DIR  = ./src
-INC_DIR  = ./inc
-TEST_DIR = ./test
+TEST_DIR = test
+
+# add files to Makefiles's task.
+FORMAT_TARGETS += $(TEST_SRCS)
+CLEAN_TARGETS += $(TEST_TARGETS) $(TEST_RESULT) $(COV_RESULT) $(CEHCK_RESULT)
 
 # files
-SRCS = $(wildcard $(TEST_DIR)/*.cpp)
-OBJS = $(addprefix $(TEST_DIR)/, $(notdir $(SRCS:.cpp=.o)))
-DEPS = $(OBJS:.o=.d)
+TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
+TEST_OBJS = $(addprefix $(TEST_DIR)/, $(notdir $(TEST_SRCS:.cpp=.o)))
+TEST_DEPS = $(TEST_OBJS:.o=.d)
 
 # tasks
-test: format $(TEST_TARGETS) report
+test: format $(TEST_TARGETS)
+	./$(TEST_TARGETS) 2>&1 | tee $(TEST_RESULT)
 
-$(TEST_TARGETS): $(OBJS) $(LIBS)
-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+$(TEST_TARGETS): $(TEST_OBJS) $(LIBS)
+	$(CC) -o $@ $(TEST_OBJS) $(TEST_LDFLAGS)
 
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
-	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -o $@ -c $<
-
-format:
-	@for src in $(SRCS) ; do \
-		echo "Formatting $$src..." ; \
-		clang-format -i "$$src" ; \
-	done
-	@echo "Done"
+	$(CC) $(TEST_CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -o $@ -c $<
 
 report:
-	./$(TEST_TARGETS) 2>&1 | tee $(TEST_RESULT)
-	gcovr --xml --output=$(COV_RESULT) -e 'test/doctest.h' -e 'test/test_.*.cpp' -v -r .
+	gcovr --xml --output=$(COV_RESULT) -e '$(TEST_DIR)/doctest.h' -e '$(TEST_DIR)/test_.*.cpp' -v -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CEHCK_RESULT)
 
-clean:
-	$(RM) \
-		$(TEST_TARGETS) $(OBJS) $(DEPS) \
-		$(TEST_RESULT) \
-		$(COV_RESULT) \
-		$(CEHCK_RESULT)
-
--include $(DEPS)
+-include $(TEST_DEPS)
 
 .PHONY: test clean report
