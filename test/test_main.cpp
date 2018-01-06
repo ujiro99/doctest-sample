@@ -1,5 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
+#include "fakeit.hpp"
 
 // doctestもmainを生成するため、本番mainは名前を変える
 #define main main_production
