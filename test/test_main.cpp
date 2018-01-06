@@ -8,7 +8,7 @@
 #include "fibonacci.cpp"
 #include "main.cpp"
 
-TEST_SUITE("main") {
+TEST_SUITE("main.cpp") {
     TEST_CASE("returns 0") {
         CHECK(main_production(0, NULL) == 0);
     }

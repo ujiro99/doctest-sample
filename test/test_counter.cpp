@@ -5,7 +5,7 @@
 // テスト対象
 #include "counter.cpp"
 
-TEST_SUITE("counter") {
+TEST_SUITE("counter.cpp") {
     TEST_CASE("calcTime") {
         SUBCASE("shows error message.") {
             std::stringbuf buf;
@@ -19,7 +19,6 @@ TEST_SUITE("counter") {
             CHECK_EQ("[error] Fibonacci is not initialized.\n", buf.str());
 
             delete c;
-            delete prev;
         }
     }
 }
