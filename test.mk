@@ -37,4 +37,4 @@ report:
 
 -include $(TEST_DEPS)
 
-.PHONY: test clean report
+.PHONY: test report

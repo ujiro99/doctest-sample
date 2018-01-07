@@ -40,9 +40,9 @@ format:
 docs:
 	@doxygen
 
-CLEAN_TARGETS = $(TARGETS) **/*.o **/*.d **/*.cpp-* **/*.hpp-* **/*.gcno **/*.gcda
+CLEAN_TARGETS = $(TARGETS) $(OBJ_DIR) **/*.o **/*.d **/*.cpp-* **/*.hpp-* **/*.gcno **/*.gcda
 clean:
-	$(RM) $(CLEAN_TARGETS)
+	rm -rf $(CLEAN_TARGETS)
 
 .PHONY: all clean docs
 
