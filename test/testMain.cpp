@@ -3,7 +3,6 @@
 #include "MockCounter.hpp"
 #include "doctest.h"
 #include "fakeit.hpp"
-#include "fibonacci.cpp"
 
 using namespace fakeit;
 
