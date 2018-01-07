@@ -33,7 +33,7 @@ TEST_SUITE("main.cpp") {
         Mock<ICounter> mock;
         MockCounter::mockEnable = true;
         MockCounter::mock       = &mock.get();
-        When(Method(mock, setFibonacci)).Throw(std::invalid_argument("received negative value"));
+        When(Method(mock, setFibonacci)).Throw(std::exception());
         CHECK_THROWS(main_production(1, NULL));
     }
 }
