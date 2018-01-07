@@ -32,7 +32,7 @@ $(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CC) $(TEST_CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -I$(LIB_DIR) -o $@ -c $<
 
 report:
-	gcovr --xml --output=$(COV_RESULT) -e '$(LIB_DIR)/.*' -e '$(TEST_DIR)/test_.*.cpp' -e '$(TEST_DIR)/Mock.*.cpp' -v -r .
+	gcovr --xml --output=$(COV_RESULT) -e '$(LIB_DIR)/.*' -e '$(TEST_DIR)/test.*.cpp' -e '$(TEST_DIR)/mock.*.cpp' -v -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CEHCK_RESULT)
 
 -include $(TEST_DEPS)
