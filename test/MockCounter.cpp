@@ -31,3 +31,12 @@ void MockCounter::calcTime(int x) {
     }
     callCount++;
 }
+
+void MockCounter::calcTimeAsync(int x) {
+    if (mockEnable && useMock[callCount]) {
+        mock->calcTimeAsync(x);
+    } else {
+        counter->calcTimeAsync(x);
+    }
+    callCount++;
+}

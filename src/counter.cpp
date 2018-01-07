@@ -22,7 +22,24 @@ void Counter::calcTime(int x) {
     }
 
     clock_t start = clock();
-    t_fib->calc(x);
+    int ret       = t_fib->calc(x);
+
     cout << t_fib->name << "\t";
+    cout << ret << "\t";
     cout << (double)(clock() - start) / CLOCKS_PER_SEC << endl;
+}
+
+void Counter::calcTimeAsync(int x) {
+    if (t_fib == NULL) {
+        cout << "[error] Fibonacci is not initialized." << endl;
+        return;
+    }
+
+    t_fib->onExecuted = [](ExecutedData data) {
+        cout << data.name << "\t";
+        cout << data.result << "\t";
+        cout << (double)(clock() - data.start) / CLOCKS_PER_SEC << endl;
+    };
+
+    t_fib->calc(x);
 }

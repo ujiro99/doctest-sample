@@ -20,20 +20,24 @@ int main(int argc, char const *argv[]) {
     Fibonacci *r_fib = new RecursiveFibonacci();
     Fibonacci *m_fib = new MemorizeFibonacci();
     Fibonacci *d_fib = new DPFibonacci();
-    Fibonacci *a_fib = new AsyncDPFibonacci();
 
     Counter *counter = new Counter();
 
-    vector<Fibonacci *> fib(4);
+    AsyncDPFibonacci *a_fib = new AsyncDPFibonacci();
+    counter->setFibonacci(a_fib);
+    counter->calcTimeAsync(30);
+
+    vector<Fibonacci *> fib(3);
     fib[0] = r_fib;
     fib[1] = m_fib;
     fib[2] = d_fib;
-    fib[3] = a_fib;
 
     for (unsigned int i = 0; i < fib.size(); i++) {
         counter->setFibonacci(fib[i]);
         counter->calcTime(30);
     }
+
+    a_fib->wait();
 
     delete r_fib;
     delete m_fib;

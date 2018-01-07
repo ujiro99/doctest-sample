@@ -21,6 +21,12 @@ class Counter {
      */
     void calcTime(int x);
 
+    /**
+     * 非同期で計算時間を測定し、stdoutへ出力する.
+     * @param[in] x 指定する値
+     */
+    void calcTimeAsync(int x);
+
   private:
     /**
      * 測定対象のフィボナッチ数計算オブジェクト.

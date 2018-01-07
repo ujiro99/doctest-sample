@@ -4,6 +4,9 @@
  */
 #include "fibonacci.hpp"
 #include <future>
+#include <iostream>
+
+using namespace std;
 
 RecursiveFibonacci::RecursiveFibonacci() {
     name = "Recursive";
@@ -59,14 +62,30 @@ AsyncDPFibonacci::AsyncDPFibonacci() {
 
 AsyncDPFibonacci::~AsyncDPFibonacci() {}
 
-int AsyncDPFibonacci::calc(int x) {
-    int ret;
+void AsyncDPFibonacci::execCalc(int x) {
+    if (onExecuted == nullptr) {
+        cout << "onExecuted is null" << endl;
+        return;
+    }
+
     DPFibonacci *f = new DPFibonacci();
 
-    // execute async
-    auto t = std::thread([f, &x, &ret] { ret = f->calc(x); });
-    t.join();
+    int ret = f->calc(x);
 
     delete f;
-    return ret;
+
+    data.name   = name;
+    data.result = ret;
+    onExecuted(data);
+}
+
+int AsyncDPFibonacci::calc(int x) {
+    data.start = clock();
+    // execute async
+    t = std::thread(&AsyncDPFibonacci::execCalc, this, x);
+    return 0;
+}
+
+void AsyncDPFibonacci::wait() {
+    t.join();
 }
