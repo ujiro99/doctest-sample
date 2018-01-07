@@ -7,9 +7,9 @@ LDFLAGS =
 TARGETS = fibonacci
 
 # directories
-SRC_DIR = ./src
-INC_DIR = ./inc
-OBJ_DIR = ./obj
+SRC_DIR = src
+INC_DIR = inc
+OBJ_DIR = obj
 
 # files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)

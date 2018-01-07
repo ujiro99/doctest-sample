@@ -9,15 +9,17 @@ CEHCK_RESULT = cppcheck_result.xml
 
 # directories
 TEST_DIR = test
-
-# add files to Makefiles's task.
-FORMAT_TARGETS += $(TEST_SRCS)
-CLEAN_TARGETS += $(TEST_TARGETS) $(TEST_RESULT) $(COV_RESULT) $(CEHCK_RESULT)
+LIB_DIR  = $(TEST_DIR)/lib
 
 # files
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
+TEST_INCS = $(wildcard $(TEST_DIR)/*.hpp)
 TEST_OBJS = $(addprefix $(TEST_DIR)/, $(notdir $(TEST_SRCS:.cpp=.o)))
 TEST_DEPS = $(TEST_OBJS:.o=.d)
+
+# add files to Makefiles's task.
+FORMAT_TARGETS += $(TEST_SRCS) $(TEST_INCS)
+CLEAN_TARGETS += $(TEST_TARGETS) $(TEST_RESULT) $(COV_RESULT) $(CEHCK_RESULT)
 
 # tasks
 test: format $(TEST_TARGETS)
@@ -27,10 +29,10 @@ $(TEST_TARGETS): $(TEST_OBJS) $(LIBS)
 	$(CC) -o $@ $(TEST_OBJS) $(TEST_LDFLAGS)
 
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
-	$(CC) $(TEST_CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -o $@ -c $<
+	$(CC) $(TEST_CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -I$(LIB_DIR) -o $@ -c $<
 
 report:
-	gcovr --xml --output=$(COV_RESULT) -e '$(TEST_DIR)/doctest.h' -e '$(TEST_DIR)/test_.*.cpp' -v -r .
+	gcovr --xml --output=$(COV_RESULT) -e '$(LIB_DIR)/.*' -e '$(TEST_DIR)/test_.*.cpp' -e '$(TEST_DIR)/Mock.*.cpp' -v -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CEHCK_RESULT)
 
 -include $(TEST_DEPS)
