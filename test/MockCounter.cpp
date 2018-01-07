@@ -3,9 +3,11 @@
 
 ICounter *MockCounter::mock  = nullptr;
 bool MockCounter::mockEnable = false;
+bool *MockCounter::useMock   = nullptr;
 
 MockCounter::MockCounter() {
-    counter = new Counter();
+    counter   = new Counter();
+    callCount = 0;
 }
 
 MockCounter::~MockCounter() {
@@ -13,17 +15,19 @@ MockCounter::~MockCounter() {
 }
 
 void MockCounter::setFibonacci(Fibonacci *fib) {
-    if (mockEnable) {
+    if (mockEnable && useMock[callCount]) {
         mock->setFibonacci(fib);
     } else {
         counter->setFibonacci(fib);
     }
+    callCount++;
 }
 
 void MockCounter::calcTime(int x) {
-    if (mockEnable) {
+    if (mockEnable && useMock[callCount]) {
         mock->calcTime(x);
     } else {
         counter->calcTime(x);
     }
+    callCount++;
 }

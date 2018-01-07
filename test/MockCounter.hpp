@@ -4,6 +4,7 @@
 
 class ICounter {
   public:
+    virtual ~ICounter()                       = 0;
     virtual void setFibonacci(Fibonacci *fib) = 0;
     virtual void calcTime(int x)              = 0;
 };
@@ -18,8 +19,10 @@ class MockCounter {
     // for mock
     static ICounter *mock;
     static bool mockEnable;
+    static bool *useMock;
 
   private:
     // for original
     Counter *counter;
+    int callCount;
 };
