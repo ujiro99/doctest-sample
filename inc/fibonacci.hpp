@@ -59,3 +59,16 @@ class DPFibonacci : public Fibonacci {
 
     int calc(int x);
 };
+
+/**
+ * 非同期で動的計画法を使って計算するクラス.
+ */
+class AsyncDPFibonacci : public Fibonacci {
+  public:
+    /** コンストラクタ. */
+    AsyncDPFibonacci();
+    /** デストラクタ. */
+    ~AsyncDPFibonacci();
+
+    int calc(int x);
+};

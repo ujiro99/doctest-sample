@@ -1,5 +1,5 @@
 CC = g++
-LIBS =
+LIBS = -pthread
 CFLAGS = -g -Wall -MMD -MP
 LDFLAGS =
 
@@ -20,8 +20,8 @@ DEPS = $(OBJS:.o=.d)
 # tasks
 all: format $(TARGETS)
 
-$(TARGETS): $(OBJS) $(LIBS)
-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+$(TARGETS): $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@if [ ! -d $(OBJ_DIR) ]; \

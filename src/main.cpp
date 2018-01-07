@@ -20,13 +20,15 @@ int main(int argc, char const *argv[]) {
     Fibonacci *r_fib = new RecursiveFibonacci();
     Fibonacci *m_fib = new MemorizeFibonacci();
     Fibonacci *d_fib = new DPFibonacci();
+    Fibonacci *a_fib = new AsyncDPFibonacci();
 
     Counter *counter = new Counter();
 
-    vector<Fibonacci *> fib(3);
+    vector<Fibonacci *> fib(4);
     fib[0] = r_fib;
     fib[1] = m_fib;
     fib[2] = d_fib;
+    fib[3] = a_fib;
 
     for (unsigned int i = 0; i < fib.size(); i++) {
         counter->setFibonacci(fib[i]);
@@ -36,6 +38,7 @@ int main(int argc, char const *argv[]) {
     delete r_fib;
     delete m_fib;
     delete d_fib;
+    delete a_fib;
     delete counter;
 
     return 0;

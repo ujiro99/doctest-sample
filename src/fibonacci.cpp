@@ -3,6 +3,7 @@
  * @brief フィボナッチ数を計算するクラスの定義を記載する.
  */
 #include "fibonacci.hpp"
+#include <future>
 
 RecursiveFibonacci::RecursiveFibonacci() {
     name = "Recursive";
@@ -50,4 +51,22 @@ int DPFibonacci::calc(int x) {
         dp[i] = dp[i - 1] + dp[i - 2];
     }
     return dp[x];
+}
+
+AsyncDPFibonacci::AsyncDPFibonacci() {
+    name = "Async   ";
+}
+
+AsyncDPFibonacci::~AsyncDPFibonacci() {}
+
+int AsyncDPFibonacci::calc(int x) {
+    int ret;
+    DPFibonacci *f = new DPFibonacci();
+
+    // execute async
+    auto t = std::thread([f, &x, &ret] { ret = f->calc(x); });
+    t.join();
+
+    delete f;
+    return ret;
 }
