@@ -5,11 +5,17 @@ LDFLAGS =
 
 # output files
 TARGETS = fibonacci
+COVERAGE = gcover_result.xml
+CPPCHECK = cppcheck_result.xml
+TEST_TARGETS = test_fibonacci
+TEST_RESULT = test_result.txt
 
 # directories
 SRC_DIR = src
 INC_DIR = inc
 OBJ_DIR = obj
+TEST_DIR = test
+LIB_DIR = $(TEST_DIR)/lib
 
 # files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -29,9 +35,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 		fi
 	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
-FORMAT_TARGETS = $(INCS) $(SRCS)
 format:
-	@for src in $(FORMAT_TARGETS) ; do \
+	@for src in $(INCS) $(SRCS) ; do \
 		echo "Formatting $$src..." ; \
 		clang-format -i "$$src" ; \
 	done
@@ -40,11 +45,19 @@ format:
 docs:
 	@doxygen
 
-CLEAN_TARGETS = $(TARGETS) $(OBJ_DIR) **/*.o **/*.d **/*.cpp-* **/*.hpp-* **/*.gcno **/*.gcda
+report: $(TEST_DIR)
+	./$(TEST_TARGETS) 2>&1 | tee $(TEST_RESULT)
+	gcovr --xml --output=$(COVERAGE) -e '$(LIB_DIR)/.*' -e '$(TEST_DIR)/test.*.cpp' -e '$(TEST_DIR)/mock.*.cpp' -v -r .
+	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CPPCHECK)
+
+$(TEST_DIR):
+	$(MAKE) -C $@
+
+CLEAN_TARGETS = $(TARGETS) $(COVERAGE) $(CPPCHECK) $(TEST_TARGETS) $(TEST_RESULT) $(OBJ_DIR) \
+				**/*.o **/*.d **/*.cpp-* **/*.hpp-* **/*.gcno **/*.gcda
 clean:
 	rm -rf $(CLEAN_TARGETS)
 
-.PHONY: all clean docs
+.PHONY: all format docs report $(TEST_DIR) clean
 
 -include $(DEPS)
-include test.mk
