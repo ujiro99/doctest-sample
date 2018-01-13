@@ -1,8 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <stdexcept>
-#include "MockCounter.hpp"
 #include "doctest.h"
 #include "fakeit.hpp"
+#include "mock/mockCounter.hpp"
 
 using namespace fakeit;
 

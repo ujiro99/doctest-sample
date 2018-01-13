@@ -12,9 +12,10 @@ TEST_DIR = test
 LIB_DIR  = $(TEST_DIR)/lib
 
 # files
-TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
-TEST_INCS = $(wildcard $(TEST_DIR)/*.hpp)
-TEST_OBJS = $(addprefix $(TEST_DIR)/, $(notdir $(TEST_SRCS:.cpp=.o)))
+LIB_FILES = $(shell find $(LIB_DIR) -type f)
+TEST_SRCS = $(shell find $(TEST_DIR) -name *.cpp)
+TEST_INCS = $(filter-out $(LIB_FILES), $(shell find $(TEST_DIR) -name *.hpp))
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 TEST_DEPS = $(TEST_OBJS:.o=.d)
 
 # add files to Makefiles's task.
@@ -28,13 +29,12 @@ test: format $(TEST_TARGETS)
 $(TEST_TARGETS): $(TEST_OBJS)
 	$(CC) -o $@ $(TEST_OBJS) $(TEST_LDFLAGS) $(LIBS)
 
-$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
+%.o: %.cpp
 	$(CC) $(TEST_CFLAGS) -I$(INC_DIR) -I$(SRC_DIR) -I$(LIB_DIR) -o $@ -c $<
 
 report:
 	gcovr --xml --output=$(COV_RESULT) -e '$(LIB_DIR)/.*' -e '$(TEST_DIR)/test.*.cpp' -e '$(TEST_DIR)/mock.*.cpp' -v -r .
 	cppcheck --enable=all --xml --suppress=missingIncludeSystem -I $(INC_DIR) $(SRC_DIR) 2> $(CEHCK_RESULT)
-
 -include $(TEST_DEPS)
 
 .PHONY: test report
